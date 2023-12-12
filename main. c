@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+//Area of rectangle
+float AreaOfRectangle(float lenght, float width)
+{
+    return length * width;
+}
+
+// Perimeter of rectangle
+float PerimeterOfRectangle(float width, float lenght)
+{
+    return 2 * (lenght + width);
+}
+
+// Area of Square
+float AreaOfSquare(float side)
+{
+    return side * side;
+}
+
+// Perimeter of square
+float PerimeterOfSquare(float side)
+{
+    return 4 * side;
+}
+
+//Area of Triangle
+float AreaOfTriangle(float base, float height)
+{
+    return 0.5 * base * height;
+}
+
+// Perimeter of a Triangle(naming it by the name of the 3 sides of the triangle para aesthetic)
+float PerimeterOfTriangle(float hypotenuse, float adjacent, float opposite)
+{
+    return hypotenuse + adjacent + opposite;
+}
+
+
+int main()
+{
+    
+}
+
+int MainMenu()
+{
+    int choice, area_choice;
+    int length, width;
+
+    printf(" Choose an operation");
+    printf("1. Calculate the area");
+    printf("2. Calculate the perimeter");
+    printf("3. Calculate the volume"); //later kana
+    printf("4. All about Circle")
+        printf("5. Browse History");
+    printf("5. Exit Program");
+    scanf("%d", &choice);
+
+    if (choice == 1)
+    {
+        printf("What kind of area are you trying to find?");
+        printf("Area of a rectangle");
+        printf("Area of a square");
+        printf("Area of a Triangle");
+        scanf("%d", &area_choice);
+
+        if (area_choice == 1)
+        {
+            
+        }
+    }
+}
