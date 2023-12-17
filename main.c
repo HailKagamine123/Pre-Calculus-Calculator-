@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+// Menu Functions
 int MainMenu();
+int AreaMenu();
 
 // Area Functions
 float AreaOfRectangle(float, float);
@@ -15,33 +17,15 @@ float PerimeterOfSquare(float);
 
 int main()
 {
-	MainMenu();
-}
-
-int MainMenu()
-{
-	int choice, area_choice;
-	float length, width, side,base, height;
+    int choice, area_choice;
+    float length, width, side,base, height;
 	float area_rec, area_squa, area_tria;
 
-	printf(" Choose an operation\n");
-	printf("1. Calculate the area\n");
-	printf("2. Calculate the perimeter\n");
-	printf("3. Calculate the volume\n"); //later kana
-	printf("4. All about Circle\n");
-	printf("5. Browse History\n");
-	printf("5. Exit Program");
-	printf("Enter choice: ");
-	scanf("%d", &choice);
+    choice = MainMenu();
 
 	if (choice == 1)
 	{
-		printf("What kind of area are you trying to find?\n");
-		printf("Area of a rectangle\n");
-		printf("Area of a square\n");
-		printf("Area of a Triangle\n");
-		printf("Enter choice: ");
-		scanf("%d", &area_choice);
+        area_choice = AreaMenu();
 
 		if (area_choice == 1)
 		{
@@ -73,6 +57,39 @@ int MainMenu()
 			printf("The area of a triangle whose base is %.2f and has the height of %.2f is %.2f");
 		}
 	}
+}
+
+int MainMenu()
+{
+    int choice;
+
+	printf(" Choose an operation\n");
+	printf("1. Calculate the area\n");
+	printf("2. Calculate the perimeter\n");
+	printf("3. Calculate the volume\n"); //later kana
+	printf("4. All about Circle\n");
+	printf("5. Browse History\n");
+	printf("5. Exit Program\n");
+	printf("Enter choice: ");
+	scanf("%d", &choice);
+
+	return choice;
+
+
+}
+
+int AreaMenu()
+{
+    int area_choice;
+
+    printf("What kind of area are you trying to find?\n");
+    printf("1. Area of a rectangle\n");
+    printf("2. Area of a square\n");
+    printf("3. Area of a Triangle\n");
+    printf("Enter choice: ");
+    scanf("%d", &area_choice);
+
+    return area_choice;
 }
 
 //Area of rectangle
