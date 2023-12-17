@@ -1,37 +1,16 @@
 #include <stdio.h>
 
 int MainMenu();
+
+// Area Functions
 float AreaOfRectangle(float, float);
+float AreaOfTriangle(float, float);
+float AreaOfSquare(float);
 
-// Perimeter of rectangle
-float PerimeterOfRectangle(float width, float lenght)
-{
-	return 2 * (lenght + width);
-}
-
-// Area of Square
-float AreaOfSquare(float side)
-{
-	return side * side;
-}
-
-// Perimeter of square
-float PerimeterOfSquare(float side)
-{
-	return 4 * side;
-}
-
-//Area of Triangle
-float AreaOfTriangle(float base, float height)
-{
-	return 0.5 * base * height;
-}
-
-// Perimeter of a Triangle(naming it by the name of the 3 sides of the triangle para aesthetic)
-float PerimeterOfTriangle(float hypotenuse, float adjacent, float opposite)
-{
-	return hypotenuse + adjacent + opposite;
-}
+// Perimeter Functions
+float PerimeterOfRectangle(float, float);
+float PerimeterOfTriangle(float, float, float);
+float PerimeterOfSquare(float);
 
 
 int main()
@@ -77,7 +56,7 @@ int MainMenu()
 		}
 		else if(area_choice == 2)
 		{
-			printf("Please enter the valueof side: ");
+			printf("Please enter the value of side: ");
 			scanf("%f", &side);
 
 			area_squa = AreaOfSquare(side);
@@ -101,3 +80,34 @@ float AreaOfRectangle(float length, float width)
 {
 	return length * width;
 }
+
+//Area of Triangle
+float AreaOfTriangle(float base, float height)
+{
+	return 0.5 * base * height;
+}
+
+// Area of Square
+float AreaOfSquare(float side)
+{
+	return side * side;
+}
+
+// Perimeter of rectangle
+float PerimeterOfRectangle(float width, float lenght)
+{
+	return 2 * (lenght + width);
+}
+
+// Perimeter of a Triangle(naming it by the name of the 3 sides of the triangle para aesthetic)
+float PerimeterOfTriangle(float hypotenuse, float adjacent, float opposite)
+{
+	return hypotenuse + adjacent + opposite;
+}
+
+// Perimeter of square
+float PerimeterOfSquare(float side)
+{
+	return 4 * side;
+}
+
