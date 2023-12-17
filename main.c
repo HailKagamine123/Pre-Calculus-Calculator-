@@ -1,12 +1,7 @@
 #include <stdio.h>
 
 int MainMenu();
-
-//Area of rectangle
-float AreaOfRectangle(float length, float width)
-{
-	return length * width;
-}
+float AreaOfRectangle(float, float);
 
 // Perimeter of rectangle
 float PerimeterOfRectangle(float width, float lenght)
@@ -41,7 +36,7 @@ float PerimeterOfTriangle(float hypotenuse, float adjacent, float opposite)
 
 int main()
 {
-	MainMenu(); 
+	MainMenu();
 }
 
 int MainMenu()
@@ -76,7 +71,7 @@ int MainMenu()
 			scanf("%f", &length);
 			printf("Width: ");
 			scanf("%f", &width);
-			
+
 			area_rec = AreaOfRectangle(length, width);
 			printf("The area of the rectangle whose length is %.2f and whose width is %.2f is %.2f", length, width, area_rec);
 		}
@@ -84,7 +79,7 @@ int MainMenu()
 		{
 			printf("Please enter the valueof side: ");
 			scanf("%f", &side);
-			
+
 			area_squa = AreaOfSquare(side);
 			printf("The area of the square who has the size of %.2f on every side is %.2f", side, area_squa);
 		}
@@ -94,9 +89,15 @@ int MainMenu()
 			scanf("%f", &base);
 			printf("Enter the measurement of the height: ");
 			scanf("%f",&height);
-			
+
 			area_tria= AreaOfTriangle(base,height);
 			printf("The area of a triangle whose base is %.2f and has the height of %.2f is %.2f");
 		}
 	}
+}
+
+//Area of rectangle
+float AreaOfRectangle(float length, float width)
+{
+	return length * width;
 }
