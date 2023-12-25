@@ -4,9 +4,10 @@
 
 // Menu Prototypes
 int MainMenu();
-int PerimeterMenu();
+int AreaMenu();
 int VolumeMenu();
 int PyramidMenu();
+int PerimeterMenu();
 int PolyhedronMenu();
 
 // Perimeter Prototypes
@@ -18,37 +19,48 @@ double RectanglePerimeter();
 
 // Volume Prototypes
 double CubeVolume();
-double PrismVolume();
-double CylinderVolume();
 double ConeVolume();
+double PrismVolume();
 double SphereVolume();
-const char * PyramidVolume(double*);
+double CylinderVolume();
 double EllipsoidVolume();
-double TetrahedronVolume();
 double OctahedronVolume();
-double DodecahedronVolume();
+double TetrahedronVolume();
 double IcosahedronVolume();
+double DodecahedronVolume();
+// this function uses a pass by ref parameter
+const char *PyramidVolume(double *);
 
-//Area of Polygons
-void calculateTriangleArea(float, float);
-void calculateRectangleArea(float, float);
-void calculatePentagonArea(float);
-void calculateHexagonArea(float);
-void calculateHeptagonArea(float);
-void calculateOctagonArea(float);
-void calculateNonagonArea(float);
-void calculateDecagonArea(float);
+// Area of Polygons
+void HexagonArea(float);
+void OctagonArea(float);
+void NonagonArea(float);
+void DecagonArea(float);
+void PentagonArea(float);
+void HeptagonArea(float);
+void TriangleArea(float, float);
+void RectangleArea(float, float);
 
 // Utility Prototype
 int Converter();
 double SideEntry();
 
-int main() {
+// macro
+// macro is used to define a constant value
+// example: #define pi 3.14159
+// pi is now a constant value of 3.14159, and you want to use it every time and don't need to change
+// example: #define note() printf("\nPlease Select only from choices\n");
+// note() is now a function that prints the string "Please Select only from choices" and you can use it every time
+// note() is used in the main function
+#define note() printf("\nPlease Select only from choices\n");
+
+int main()
+{
     double side;
 
     int menuChoice;
     double perimeter, volume, convert;
-    char *perimeterSelectedName, *volumeSelectedName;     // string holder
+    char *perimeterSelectedName, *volumeSelectedName; // string holder
 
     float x, y, squared, angle;
     int shape;
@@ -63,7 +75,7 @@ int main() {
         {
         case 0:
             return 0; // exit the program
-        case 1: // square
+        case 1:       // square
             perimeter = SquarePerimeter();
             perimeterSelectedName = "Square";
             break;
@@ -85,26 +97,11 @@ int main() {
             break;
         }
 
-        printf("The total perimeter of the %s is : %.2lf", perimeterSelectedName, perimeter );
+        printf("The total perimeter of the %s is : %.2lf", perimeterSelectedName, perimeter);
     }
     else if (menuChoice == 2)
     {
-        printf("Area Of Regular 2D Polygons:\n");
-        printf("\n");
-        printf("Triangle = 3\n");
-        printf("Square = 4\n");
-        printf("Pentagon = 5\n");
-        printf("Hexagon = 6\n");
-        printf("Heptagon = 7\n");
-        printf("Octagon = 8\n");
-        printf("Nonagon = 9\n");
-        printf("Decagon = 10\n");
-        printf("\n");
-        printf("Select a 2D shape to be computed: ");
-        scanf("%d", &shape);
-        printf("\n");
-
-        switch (shape)
+        switch (AreaMenu())
         {
         case 3:
             printf("You Have Chosen Triangle!\n");
@@ -114,7 +111,7 @@ int main() {
             printf("Enter height: ");
             scanf("%f", &y);
             printf("\n");
-            calculateTriangleArea(x, y);
+            TriangleArea(x, y);
             break;
 
         case 4:
@@ -125,7 +122,7 @@ int main() {
             printf("Enter width: ");
             scanf("%f", &y);
             printf("\n");
-            calculateRectangleArea(x, y);
+            RectangleArea(x, y);
             break;
 
         case 5:
@@ -134,7 +131,7 @@ int main() {
             printf("Enter side length: ");
             scanf("%f", &x);
             printf("\n");
-            calculatePentagonArea(x);
+            PentagonArea(x);
             break;
 
         case 6:
@@ -143,7 +140,7 @@ int main() {
             printf("Enter side length: ");
             scanf("%f", &x);
             printf("\n");
-            calculateHexagonArea(x);
+            HexagonArea(x);
             break;
 
         case 7:
@@ -151,7 +148,7 @@ int main() {
             printf("\n");
             printf("Enter side length: ");
             scanf("%f", &x);
-            calculateHeptagonArea(x);
+            HeptagonArea(x);
             break;
 
         case 8:
@@ -159,7 +156,7 @@ int main() {
             printf("\n");
             printf("Enter side length: ");
             scanf("%f", &x);
-            calculateOctagonArea(x);
+            OctagonArea(x);
             break;
 
         case 9:
@@ -167,7 +164,7 @@ int main() {
             printf("\n");
             printf("Enter side length: ");
             scanf("%f", &x);
-            calculateNonagonArea(x);
+            NonagonArea(x);
             break;
 
         case 10:
@@ -175,14 +172,13 @@ int main() {
             printf("\n");
             printf("Enter side length: ");
             scanf("%f", &x);
-            calculateDecagonArea(x);
+            DecagonArea(x);
             break;
 
         default:
             printf("Invalid Polygon!");
             break;
         }
-
     }
     else if (menuChoice == 3)
     {
@@ -190,36 +186,36 @@ int main() {
         {
         case 0:
             return 0;
-        case 1: //cube
+        case 1: // cube
             volume = CubeVolume();
             volumeSelectedName = "Cube";
             break;
-        case 2: //prism
+        case 2: // prism
             volume = PrismVolume();
             volumeSelectedName = "Prism";
             break;
-        case 3: //cylinder
+        case 3: // cylinder
             volume = CylinderVolume();
             volumeSelectedName = "Cylinder";
             break;
-        case 4: //cone
+        case 4: // cone
             volume = ConeVolume();
             volumeSelectedName = "Cone";
             break;
-        case 5: //sphere
+        case 5: // sphere
             volume = SphereVolume();
             volumeSelectedName = "Sphere";
             break;
-        case 6: //pyramids
+        case 6: // pyramids
             volumeSelectedName = PyramidVolume(&volume);
             break;
 
-        case 7: //ellipsoid
+        case 7: // ellipsoid
             volume = EllipsoidVolume();
             volumeSelectedName = "Ellipsoid";
             break;
 
-        case 8: //polyhedron
+        case 8: // polyhedron
             switch (PolyhedronMenu())
             {
             case 1:
@@ -233,18 +229,13 @@ int main() {
                 break;
 
             case 3:
-                volume =
-                    // Dodecahedron
-                    printf("Enter side length: ");
-                scanf("%lf", &side);
-                printf("Dodecahedron Volume: %.2lf\n", (15.0 + 7.0 * sqrt(5.0)) / 4.0 * pow(side, 3));
+                volume = DodecahedronVolume();
+                volumeSelectedName = "Dodecahedron";
                 break;
 
             case 4:
-                // Icosahedron
-                printf("Enter side length: ");
-                scanf("%lf", &side);
-                printf("Icosahedron Volume: %.2lf\n", (5.0 / 12.0) * (3.0 + sqrt(5.0)) * pow(side, 3));
+                volume = IcosahedronVolume();
+                volumeSelectedName = "Icosahedron";
                 break;
 
             default:
@@ -266,7 +257,6 @@ int main() {
     else
         printf("Invalid Choice");
     return 0;
-
 }
 
 // Menu Functions
@@ -276,7 +266,7 @@ int MainMenu()
 
     do
     {
-        printf("Please Select only from choices");
+        note();
         printf("Choose what you want to get:\n");
         printf("1. Perimeter\n");
         printf("2. Area\n");
@@ -284,6 +274,7 @@ int MainMenu()
         printf("4. All about circle\n");
         printf("5. Unit Converter\n");
         printf("0. Exit Program\n");
+        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &required);
     } while (required < 0 || required > 5);
@@ -297,16 +288,17 @@ int PerimeterMenu()
 
     do
     {
-        printf("Please Select only from choices");
-        printf("What figure is it ?\n" ) ;
-        printf("1. Square\n") ;
-        printf("2. Circle\n") ;
+        note();
+        printf("What figure is it ?\n");
+        printf("1. Square\n");
+        printf("2. Circle\n");
         printf("3. Rectangle\n");
         printf("4. Triangle\n");
         printf("5. Polygon (up to Decagon)\n");
         printf("0. Exit Program\n");
+        printf("\n");
         printf("Enter your choice: ");
-        scanf("%d", &figureChoice );
+        scanf("%d", &figureChoice);
     } while (figureChoice < 0 || figureChoice > 5);
 
     return figureChoice;
@@ -318,7 +310,7 @@ int VolumeMenu()
 
     do
     {
-        printf("Please Select only from choices");
+        note();
         printf("What figure is it?\n");
         printf("1. Cube\n");
         printf("2. Prism\n");
@@ -329,9 +321,10 @@ int VolumeMenu()
         printf("7. Ellipsoid\n");
         printf("8. Polyhedron\n");
         printf("0. Exit Program\n");
+        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &figureChoice);
-    } while(figureChoice < 0 || figureChoice > 8);
+    } while (figureChoice < 0 || figureChoice > 8);
 
     return figureChoice;
 }
@@ -342,15 +335,17 @@ int PyramidMenu()
 
     do
     {
-        printf("Please Select only from choices");
+        note();
         printf("Choose a pyramid \n");
         printf("1. Triangular Pyramid\n");
         printf("2. Rectangular Pyramid\n");
         printf("3. Pentagonal Pyramid\n");
         printf("4. Hexagonal Pyramid\n");
+        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &pyramidChoice);
-    } while(pyramidChoice < 1 || pyramidChoice > 4);
+    } while (pyramidChoice < 1 || pyramidChoice > 4);
+    printf("\n");
 
     return pyramidChoice;
 }
@@ -359,15 +354,47 @@ int PolyhedronMenu()
 {
     int polyhedronChoice;
 
-    printf("Choose a polyhedron \n");
-    printf("1. Tetrahedron\n");
-    printf("2. Octahedron\n");
-    printf("3. Dodecahedron\n");
-    printf("4. Icosahedron\n");
-    printf("Enter your choice: ");
-    scanf("%d", &polyhedronChoice);
+    do
+    {
+        note();
+        printf("Choose a polyhedron \n");
+        printf("1. Tetrahedron\n");
+        printf("2. Octahedron\n");
+        printf("3. Dodecahedron\n");
+        printf("4. Icosahedron\n");
+        printf("\n");
+        printf("Enter your choice: ");
+        scanf("%d", &polyhedronChoice);
+    } while (polyhedronChoice < 1 || polyhedronChoice > 4);
+    printf("\n");
 
     return polyhedronChoice;
+}
+
+int AreaMenu()
+{
+    int figureChoice;
+
+    do
+    {
+        note();
+        printf("Area Of Regular 2D Polygons:\n");
+        printf("\n");
+        printf("1. Triangle\n");
+        printf("2. Square\n");
+        printf("3. Pentagon\n");
+        printf("4. Hexagon\n");
+        printf("5. Heptagon\n");
+        printf("6. Octagon\n");
+        printf("7. Nonagon\n");
+        printf("8. Decagon\n");
+        printf("\n");
+        printf("Select a 2D shape to be computed: ");
+        scanf("%d", &figureChoice);
+    } while (figureChoice < 1 || figureChoice > 8);
+    printf("\n");
+
+    return figureChoice;
 }
 
 // Perimeter Computation Functions
@@ -385,8 +412,8 @@ double CirclePerimeter()
 {
     double input;
 
-    printf ( "Enter radius: " ) ;
-    scanf ( "%lf", &input ) ;
+    printf("Enter radius: ");
+    scanf("%lf", &input);
 
     return input * 2 * M_PI;
 }
@@ -395,9 +422,9 @@ double RectanglePerimeter()
 {
     double length, width;
 
-    printf ( "Enter length and width: \n" ) ;
-    printf ( "Use commas to separate each number \n" ) ;
-    scanf ( "%lf , %lf", &length, &width ) ;
+    printf("Enter length and width: \n");
+    printf("Use commas to separate each number \n");
+    scanf("%lf , %lf", &length, &width);
 
     return (length * 2) + (width * 2);
 }
@@ -406,9 +433,9 @@ double TrianglePerimeter()
 {
     double base, height;
 
-    printf ( "Enter base and height: \n" ) ;
-    printf ( "Use commas to separate each number \n" ) ;
-    scanf ( "%lf , %lf", &base, &height );
+    printf("Enter base and height: \n");
+    printf("Use commas to separate each number \n");
+    scanf("%lf , %lf", &base, &height);
 
     return (base * 2) + height;
 }
@@ -417,10 +444,10 @@ double PolygonPerimeter()
 {
     double side, length;
 
-    printf ( "Enter the number of sides: " ) ;
-    scanf ( "%lf", &side ) ;
-    printf ( "Enter the length of each side: " ) ;
-    scanf ( "%lf", &length) ;
+    printf("Enter the number of sides: ");
+    scanf("%lf", &side);
+    printf("Enter the length of each side: ");
+    scanf("%lf", &length);
 
     return side * length;
 }
@@ -436,8 +463,8 @@ double CubeVolume()
         printf("Please use only yes or no\n");
         printf("Is there a need for conversion? yes or no \n");
         scanf("%s", &conversionChoice);
-        if(strstr(tolower(conversionChoice), "y"))
-            // strstr() are used to check from first parameter if the second parameter exist. n here is if y exist in conversionChoice
+        if (strstr(tolower(conversionChoice), "y"))
+        // strstr() are used to check from first parameter if the second parameter exist. n here is if y exist in conversionChoice
         {
             length = Converter();
             break;
@@ -449,9 +476,9 @@ double CubeVolume()
             scanf("%lf", &length);
             break;
         }
-    } while(1);
+    } while (1);
 
-    return length*length*length;
+    return length * length * length;
 }
 
 double CylinderVolume()
@@ -462,7 +489,7 @@ double CylinderVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf", &radius, &height);
 
-    return M_PI*radius*radius*height;
+    return M_PI * radius * radius * height;
 }
 
 double PrismVolume()
@@ -473,7 +500,7 @@ double PrismVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf, %lf", &length, &width, &height);
 
-    return length*width*height;
+    return length * width * height;
 }
 
 double ConeVolume()
@@ -484,7 +511,7 @@ double ConeVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf", &radius, &height);
 
-    return (M_PI*radius*radius*height)/3;
+    return (M_PI * radius * radius * height) / 3;
 }
 
 double SphereVolume()
@@ -494,11 +521,20 @@ double SphereVolume()
     printf("Enter radius: \n");
     scanf("%lf, %lf", &radius, &height);
 
-    return (4*M_PI*radius*radius*radius)/3;
+    return (4 * M_PI * radius * radius * radius) / 3;
 }
 
 // const char * is used to return a string. the double* volume uses a pass by ref parameter.
-const char * PyramidVolume(double* volume)
+// explaining pass by reference
+// pass by reference is used to pass a variable to a function and the function will change the value of the variable
+// example: void change(int *x) { *x = 10; }
+// int main() { int x = 5; change(&x); printf("%d", x); }
+// the output will be 10 because the function change() changed the value of x to 10
+// reason of using it here is because we want to return a string and a double value
+// by using this we can return both
+// also instead of making multiple function with almost similar formula we use here 1 with multiple variations
+// in comparison
+const char *PyramidVolume(double *volume)
 {
     double base, height;
 
@@ -550,8 +586,135 @@ double OctahedronVolume()
     return (1.0 / 3.0) * sqrt(2.0) * pow(SideEntry(), 3);
 }
 
+double IcosahedronVolume()
+{
+    return (5.0 / 12.0) * (3.0 + sqrt(5.0)) * pow(SideEntry(), 3);
+}
+
+double DodecahedronVolume()
+{
+    return (15.0 + 7.0 * sqrt(5.0)) / 4.0 * pow(SideEntry(), 3);
+}
+
+// Area of polygons
+void TriangleArea(float x, float y)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float tri = 0.5 * x * y;
+    printf("Formula: 1/2 x Base x Height = Area\n");
+    printf("Formula: 1/2 x %.2f x %.2f = %.2f\n", x, y, tri);
+    printf("Area: %.2f\n", tri);
+}
+
+void RectangleArea(float x, float y)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float square = x * y;
+    printf("Formula: Length x Width = Area\n");
+    printf("Formula: %.2f x %.2f = %.2f\n", x, y, square);
+    printf("Area: %.2f\n", square);
+}
+
+void PentagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float squared = pow(x, 2);
+    float pentagon = 0.25 * squared * 6.881909602;
+    printf("Formula: 1/4 x √5(5+2√5) x a^2 = Area\n");
+    printf("Formula: 1/4 x 6.6881909602 x %.2f = %.2f\n", squared, pentagon);
+    printf("Area: %.2f\n", pentagon);
+}
+
+void HexagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float squared = pow(x, 2);
+    float root = sqrt(3);
+    float hexagon = 1.5 * root * squared;
+    printf("Formula: 3/2 x √3 x a^2 = Area\n");
+    printf("Formula: 3/2 x √3 x %.2f = %.2f\n", squared, hexagon);
+    printf("Area: %.2f\n", hexagon);
+}
+
+void HeptagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float squared = pow(x, 2);
+    float angle = 1 / tan(M_PI / 7);
+    float heptagon = (7 * squared * angle) / 4;
+    printf("Formula: 7/4 x cot(π/7) x a^2 = Area\n");
+    printf("Formula: 7/4 x cot(π/7) x %.2f = %.2f\n", squared, heptagon);
+    printf("Area: %.2f\n", heptagon);
+}
+
+void OctagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float root = sqrt(2);
+    float squared = pow(x, 2);
+    float sum = 1 + root;
+    float octagon = sum * 2 * squared;
+    printf("Formula: 2 x (1+√2) x a^2 = Area\n");
+    printf("Formula: 2 x (1+√2) x %.2f = %.2f\n", squared, octagon);
+    printf("Area: %.2f\n", octagon);
+}
+
+void NonagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float angle = 1 / tan(M_PI / 9);
+    float squared = pow(x, 2);
+    float nonagon = (angle * 9 * squared) / 4;
+    printf("Formula: 9/4 x cot(π/9) x a^2 = Area\n");
+    printf("Formula: 9/4 x cot(π/9) x %.2f = %.2f\n", squared, nonagon);
+    printf("Area: %.2f\n", nonagon);
+}
+
+void DecagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
+        printf("INVALID VALUE!");
+        return;
+    }
+    float squared = pow(x, 2);
+    float decagon = (3.077683537 * 5 * squared) / 2;
+    printf("Formula: 5/2 x (√5+2√5)  x a^2 = Area\n");
+    printf("Formula: 5/2 x (√5+2√5) x %.2f = %.2f\n", squared, decagon);
+    printf("Area: %.2f\n", decagon);
+}
+
 // Utility Funtion
-int Converter() {
+int Converter()
+{
     double number, result;
     int choice;
     char *from;
@@ -621,120 +784,4 @@ double SideEntry()
     scanf("%lf", &side);
 
     return side;
-}
-
-//Area of polygons
-void calculateTriangleArea(float x, float y)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float tri = 0.5 * x * y;
-    printf("Formula: 1/2 x Base x Height = Area\n");
-    printf("Formula: 1/2 x %.2f x %.2f = %.2f\n", x, y, tri);
-    printf("Area: %.2f\n", tri);
-}
-
-void calculateRectangleArea(float x, float y)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float square = x * y;
-    printf("Formula: Length x Width = Area\n");
-    printf("Formula: %.2f x %.2f = %.2f\n", x, y, square);
-    printf("Area: %.2f\n", square);
-}
-
-void calculatePentagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float squared = pow(x, 2);
-    float pentagon = 0.25 * squared * 6.881909602;
-    printf("Formula: 1/4 x √5(5+2√5) x a^2 = Area\n");
-    printf("Formula: 1/4 x 6.6881909602 x %.2f = %.2f\n", squared, pentagon);
-    printf("Area: %.2f\n", pentagon);
-}
-
-void calculateHexagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float squared = pow(x, 2);
-    float root = sqrt(3);
-    float hexagon = 1.5 * root * squared;
-    printf("Formula: 3/2 x √3 x a^2 = Area\n");
-    printf("Formula: 3/2 x √3 x %.2f = %.2f\n", squared, hexagon);
-    printf("Area: %.2f\n", hexagon);
-}
-
-void calculateHeptagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float squared = pow(x, 2);
-    float angle = 1 / tan(M_PI / 7);
-    float heptagon = (7 * squared * angle) / 4;
-    printf("Formula: 7/4 x cot(π/7) x a^2 = Area\n");
-    printf("Formula: 7/4 x cot(π/7) x %.2f = %.2f\n", squared, heptagon);
-    printf("Area: %.2f\n", heptagon);
-}
-
-void calculateOctagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float root = sqrt(2);
-    float squared = pow(x, 2);
-    float sum = 1 + root;
-    float octagon = sum * 2 * squared;
-    printf("Formula: 2 x (1+√2) x a^2 = Area\n");
-    printf("Formula: 2 x (1+√2) x %.2f = %.2f\n", squared, octagon);
-    printf("Area: %.2f\n", octagon);
-}
-
-void calculateNonagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float angle = 1 / tan(M_PI / 9);
-    float squared = pow(x, 2);
-    float nonagon = (angle * 9 * squared) / 4;
-    printf("Formula: 9/4 x cot(π/9) x a^2 = Area\n");
-    printf("Formula: 9/4 x cot(π/9) x %.2f = %.2f\n", squared, nonagon);
-    printf("Area: %.2f\n", nonagon);
-}
-
-void calculateDecagonArea(float x)
-{
-    if (x < 0 || x == 'a')
-    {
-        printf("INVALID VALUE!");
-        return;
-    }
-    float squared = pow(x, 2);
-    float decagon = (3.077683537 * 5 * squared) / 2;
-    printf("Formula: 5/2 x (√5+2√5)  x a^2 = Area\n");
-    printf("Formula: 5/2 x (√5+2√5) x %.2f = %.2f\n", squared, decagon);
-    printf("Area: %.2f\n", decagon);
 }
