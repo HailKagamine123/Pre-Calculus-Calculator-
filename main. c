@@ -30,14 +30,14 @@ double DodecahedronVolume();
 double IcosahedronVolume();
 
 //Area of Polygons
-void caculateTriangleArea();
-void caculateRectangleArea();
-void caculatePentagonArea();
-void calculateHexagonArea();
-void calculateHeptagonArea();
-void calculateOctagonArea();
-void calculateNonagonArea();
-void calculateDecagonArea();
+void calculateTriangleArea(float, float);
+void calculateRectangleArea(float, float);
+void calculatePentagonArea(float);
+void calculateHexagonArea(float);
+void calculateHeptagonArea(float);
+void calculateOctagonArea(float);
+void calculateNonagonArea(float);
+void calculateDecagonArea(float);
 
 // Utility Prototype
 int Converter();
