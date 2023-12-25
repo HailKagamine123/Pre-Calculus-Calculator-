@@ -1,130 +1,246 @@
 #include <stdio.h>
+#include <math.h>
 
-// Menu Functions
-int MainMenu();
-int AreaMenu();
+void calculateTriangleArea(float x, float y)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float tri = 0.5 * x * y;
+	printf("Formula: 1/2 x Base x Height = Area\n");
+	printf("Formula: 1/2 x %.2f x %.2f = %.2f\n", x, y, tri);
+	printf("Area: %.2f\n", tri);
+}
 
-// Area Functions
-float AreaOfRectangle(float, float);
-float AreaOfTriangle(float, float);
-float AreaOfSquare(float);
+void calculateRectangleArea(float x, float y)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float square = x * y;
+	printf("Formula: Length x Width = Area\n");
+	printf("Formula: %.2f x %.2f = %.2f\n", x, y, square);
+	printf("Area: %.2f\n", square);
+}
 
-// Perimeter Functions
-float PerimeterOfRectangle(float, float);
-float PerimeterOfTriangle(float, float, float);
-float PerimeterOfSquare(float);
+void calculatePentagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float squared = pow(x, 2);
+	float pentagon = 0.25 * squared * 6.881909602;
+	printf("Formula: 1/4 x √5(5+2√5) x a^2 = Area\n");
+	printf("Formula: 1/4 x 6.6881909602 x %.2f = %.2f\n", squared, pentagon);
+	printf("Area: %.2f\n", pentagon);
+}
 
+void calculateHexagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float squared = pow(x, 2);
+	float root = sqrt(3);
+	float hexagon = 1.5 * root * squared;
+	printf("Formula: 3/2 x √3 x a^2 = Area\n");
+	printf("Formula: 3/2 x √3 x %.2f = %.2f\n", squared, hexagon);
+	printf("Area: %.2f\n", hexagon);
+}
+
+void calculateHeptagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float squared = pow(x, 2);
+	float angle = 1 / tan(M_PI / 7);
+	float heptagon = (7 * squared * angle) / 4;
+	printf("Formula: 7/4 x cot(π/7) x a^2 = Area\n");
+	printf("Formula: 7/4 x cot(π/7) x %.2f = %.2f\n", squared, heptagon);
+	printf("Area: %.2f\n", heptagon);
+}
+
+void calculateOctagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float root = sqrt(2);
+	float squared = pow(x, 2);
+	float sum = 1 + root;
+	float octagon = sum * 2 * squared;
+	printf("Formula: 2 x (1+√2) x a^2 = Area\n");
+	printf("Formula: 2 x (1+√2) x %.2f = %.2f\n", squared, octagon);
+	printf("Area: %.2f\n", octagon);
+}
+
+void calculateNonagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float angle = 1 / tan(M_PI / 9);
+	float squared = pow(x, 2);
+	float nonagon = (angle * 9 * squared) / 4;
+	printf("Formula: 9/4 x cot(π/9) x a^2 = Area\n");
+	printf("Formula: 9/4 x cot(π/9) x %.2f = %.2f\n", squared, nonagon);
+	printf("Area: %.2f\n", nonagon);
+}
+
+void calculateDecagonArea(float x)
+{
+	if (x < 0 || x == 'a')
+	{
+		printf("INVALID VALUE!");
+		return;
+	}
+	float squared = pow(x, 2);
+	float decagon = (3.077683537 * 5 * squared) / 2;
+	printf("Formula: 5/2 x (√5+2√5)  x a^2 = Area\n");
+	printf("Formula: 5/2 x (√5+2√5) x %.2f = %.2f\n", squared, decagon);
+	printf("Area: %.2f\n", decagon);
+}
 
 int main()
 {
-    int choice, area_choice;
-    float length, width, side,base, height;
-	float area_rec, area_squa, area_tria;
+	float x, y, squared, angle;
+	int shape, intro_choice;
+	const double pi = 3.14159;
+	char continue_choice;
 
-    choice = MainMenu();
-
-	if (choice == 1)
+	do
 	{
-        area_choice = AreaMenu();
+		printf("Welcome to our app, user!\n");
+		printf("What would you like to do?\n");
+		printf("1. Play with circles!\n");
+		printf("2. Area of polygons.\n");
+		printf("3. Volume of the shapes.\n");
+		printf("5. Remember your previous questions.\n");
+		printf("Enter your choice: ");
+		scanf("%d", &intro_choice);
+		printf("\n");
 
-		if (area_choice == 1)
+		if (intro_choice == 1)
 		{
-			printf("Please enter the values of: \n");
-			printf("Length: ");
-			scanf("%f", &length);
-			printf("Width: ");
-			scanf("%f", &width);
-
-			area_rec = AreaOfRectangle(length, width);
-			printf("The area of the rectangle whose length is %.2f and whose width is %.2f is %.2f", length, width, area_rec);
 		}
-		else if(area_choice == 2)
+		else if (intro_choice == 2)
 		{
-			printf("Please enter the value of side: ");
-			scanf("%f", &side);
+			printf("Area Of Regular 2D Polygons:\n");
+			printf("\n");
+			printf("Triangle = 3\n");
+			printf("Square = 4\n");
+			printf("Pentagon = 5\n");
+			printf("Hexagon = 6\n");
+			printf("Heptagon = 7\n");
+			printf("Octagon = 8\n");
+			printf("Nonagon = 9\n");
+			printf("Decagon = 10\n");
+			printf("\n");
+			printf("Select a 2D shape to be computed: ");
+			scanf("%d", &shape);
+			printf("\n");
 
-			area_squa = AreaOfSquare(side);
-			printf("The area of the square who has the size of %.2f on every side is %.2f", side, area_squa);
+			switch (shape)
+			{
+			case 3:
+				printf("You Have Chosen Triangle!\n");
+				printf("\n");
+				printf("Enter base: ");
+				scanf("%f", &x);
+				printf("Enter height: ");
+				scanf("%f", &y);
+				printf("\n");
+				calculateTriangleArea(x, y);
+				break;
+
+			case 4:
+				printf("You Have Chosen Square!\n");
+				printf("\n");
+				printf("Enter length: ");
+				scanf("%f", &x);
+				printf("Enter width: ");
+				scanf("%f", &y);
+				printf("\n");
+				calculateRectangleArea(x, y);
+				break;
+
+			case 5:
+				printf("You Have Chosen Pentagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				printf("\n");
+				calculatePentagonArea(x);
+				break;
+
+			case 6:
+				printf("You Have Chosen Hexagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				printf("\n");
+				calculateHexagonArea(x);
+				break;
+
+			case 7:
+				printf("You Have Chosen Heptagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				calculateHeptagonArea(x);
+				break;
+
+			case 8:
+				printf("You Have Chosen Octagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				calculateOctagonArea(x);
+				break;
+
+			case 9:
+				printf("You Have Chosen Nonagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				calculateNonagonArea(x);
+				break;
+
+			case 10:
+				printf("You Have Chosen Decagon!\n");
+				printf("\n");
+				printf("Enter side length: ");
+				scanf("%f", &x);
+				calculateDecagonArea(x);
+				break;
+
+			default:
+				printf("Invalid Polygon!");
+				break;
+			}
 		}
-		else if (area_choice == 3)
-		{
-			printf("Enter the measurement of the base: ");
-			scanf("%f", &base);
-			printf("Enter the measurement of the height: ");
-			scanf("%f",&height);
 
-			area_tria= AreaOfTriangle(base,height);
-			printf("The area of a triangle whose base is %.2f and has the height of %.2f is %.2f");
-		}
-	}
+		printf("Do you want to continue using the app? (Y/N)");
+		scanf(" %c", &continue_choice);
+		printf("\n");
+
+	} while (continue_choice == 'y' || continue_choice == 'Y');
+
+	printf("See you next time!\n");
+	return 0;
 }
-
-int MainMenu()
-{
-    int choice;
-
-	printf(" Choose an operation\n");
-	printf("1. Calculate the area\n");
-	printf("2. Calculate the perimeter\n");
-	printf("3. Calculate the volume\n"); //later kana
-	printf("4. All about Circle\n");
-	printf("5. Browse History\n");
-	printf("5. Exit Program\n");
-	printf("Enter choice: ");
-	scanf("%d", &choice);
-
-	return choice;
-
-
-}
-
-int AreaMenu()
-{
-    int area_choice;
-
-    printf("What kind of area are you trying to find?\n");
-    printf("1. Area of a rectangle\n");
-    printf("2. Area of a square\n");
-    printf("3. Area of a Triangle\n");
-    printf("Enter choice: ");
-    scanf("%d", &area_choice);
-
-    return area_choice;
-}
-
-//Area of rectangle
-float AreaOfRectangle(float length, float width)
-{
-	return length * width;
-}
-
-//Area of Triangle
-float AreaOfTriangle(float base, float height)
-{
-	return 0.5 * base * height;
-}
-
-// Area of Square
-float AreaOfSquare(float side)
-{
-	return side * side;
-}
-
-// Perimeter of rectangle
-float PerimeterOfRectangle(float width, float lenght)
-{
-	return 2 * (lenght + width);
-}
-
-// Perimeter of a Triangle(naming it by the name of the 3 sides of the triangle para aesthetic)
-float PerimeterOfTriangle(float hypotenuse, float adjacent, float opposite)
-{
-	return hypotenuse + adjacent + opposite;
-}
-
-// Perimeter of square
-float PerimeterOfSquare(float side)
-{
-	return 4 * side;
-}
-
