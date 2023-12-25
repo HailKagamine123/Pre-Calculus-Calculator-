@@ -56,8 +56,10 @@ void calculateHexagonArea(float x)
     printf("Area: %.2f\n", hexagon);
 }
 
-void calculateHeptagonArea(float x) {
-    if (x < 0 || x == 'a') {
+void calculateHeptagonArea(float x)
+{
+    if (x < 0 || x == 'a')
+    {
         printf("INVALID VALUE!");
         return;
     }
@@ -119,130 +121,126 @@ int main()
     float x, y, squared, angle;
     int shape, intro_choice;
     const double pi = 3.14159;
+    char continue_choice;
 
-    printf("Welcome to our app, user!\n");
-    printf("What would you like to do?\n");
-    printf("1. Play with circles!\n");
-    printf("2. Area of polygons.\n");
-    printf("3. Volume of the shapes.\n");
-    printf("4. Getting to know SOH CAH TOA!\n");
-    printf("5. Remember your previous questions.\n");
-    printf("Enter your choice: ");
-    scanf("%d", &intro_choice);
-    printf("\n");
-
-    if (intro_choice == 1)
+    do
     {
-    }
-    else if (intro_choice == 2)
-    {
-        printf("Area Of Regular 2D Polygons:\n");
+        printf("Welcome to our app, user!\n");
+        printf("What would you like to do?\n");
+        printf("1. Play with circles!\n");
+        printf("2. Area of polygons.\n");
+        printf("3. Volume of the shapes.\n");
+        printf("5. Remember your previous questions.\n");
+        printf("Enter your choice: ");
+        scanf("%d", &intro_choice);
         printf("\n");
-        printf("Triangle=3\n");
-        printf("Square=4\n");
-        printf("Pentagon=5\n");
-        printf("Hexagon=6\n");
-        printf("Heptagon=7\n");
-        printf("Octagon=8\n");
-        printf("Nonagon=9\n");
-        printf("Decagon=10\n");
-        printf("\n");
-        printf("Select a 2D shape to be computed: ");
-        scanf("%d", &shape);
 
-        switch (shape)
+        if (intro_choice == 1)
         {
-        case 3:
-            printf("You Have Chosen Triangle!\n");
-            printf("\n");
-            printf("Enter base: ");
-            scanf("%f", &x);
-            printf("Enter height: ");
-            scanf("%f", &y);
-            printf("\n");
-
-            calculateTriangleArea(x, y);
-
-            break;
-
-        case 4:
-            printf("You Have Chosen Square!\n");
-            printf("\n");
-            printf("Enter length: ");
-            scanf("%f", &x);
-            printf("Enter width: ");
-            scanf("%f", &y);
-            printf("\n");
-
-            calculateRectangleArea(x, y);
-
-            break;
-
-        case 5:
-            printf("You Have Chosen Pentagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            printf("\n");
-
-            calculatePentagonArea(x);
-
-            break;
-
-        case 6:
-            printf("You Have Chosen Hexagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            printf("\n");
-
-            calculateHexagonArea(x);
-
-            break;
-
-        case 7:
-            printf("You Have Chosen Heptagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-
-            calculateHeptagonArea(x);
-            break;
-
-        case 8:
-            printf("You Have Chosen Octagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-
-            calculateOctagonArea(x);
-
-            break;
-
-        case 9:
-            printf("You Have Chosen Nonagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-
-            calculateNonagonArea(x);
-
-            break;
-
-        case 10:
-            printf("You Have Chosen Decagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-
-            calculateDecagonArea(x);
-
-            break;
-
-        default:
-            printf("Invalid Polygon!");
-            break;
         }
-    }
+        else if (intro_choice == 2)
+        {
+            printf("Area Of Regular 2D Polygons:\n");
+            printf("\n");
+            printf("Triangle = 3\n");
+            printf("Square = 4\n");
+            printf("Pentagon = 5\n");
+            printf("Hexagon = 6\n");
+            printf("Heptagon = 7\n");
+            printf("Octagon = 8\n");
+            printf("Nonagon = 9\n");
+            printf("Decagon = 10\n");
+            printf("\n");
+            printf("Select a 2D shape to be computed: ");
+            scanf("%d", &shape);
+            printf("\n");
+
+            switch (shape)
+            {
+            case 3:
+                printf("You Have Chosen Triangle!\n");
+                printf("\n");
+                printf("Enter base: ");
+                scanf("%f", &x);
+                printf("Enter height: ");
+                scanf("%f", &y);
+                printf("\n");
+                calculateTriangleArea(x, y);
+                break;
+
+            case 4:
+                printf("You Have Chosen Square!\n");
+                printf("\n");
+                printf("Enter length: ");
+                scanf("%f", &x);
+                printf("Enter width: ");
+                scanf("%f", &y);
+                printf("\n");
+                calculateRectangleArea(x, y);
+                break;
+
+            case 5:
+                printf("You Have Chosen Pentagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                printf("\n");
+                calculatePentagonArea(x);
+                break;
+
+            case 6:
+                printf("You Have Chosen Hexagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                printf("\n");
+                calculateHexagonArea(x);
+                break;
+
+            case 7:
+                printf("You Have Chosen Heptagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                calculateHeptagonArea(x);
+                break;
+
+            case 8:
+                printf("You Have Chosen Octagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                calculateOctagonArea(x);
+                break;
+
+            case 9:
+                printf("You Have Chosen Nonagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                calculateNonagonArea(x);
+                break;
+
+            case 10:
+                printf("You Have Chosen Decagon!\n");
+                printf("\n");
+                printf("Enter side length: ");
+                scanf("%f", &x);
+                calculateDecagonArea(x);
+                break;
+
+            default:
+                printf("Invalid Polygon!");
+                break;
+            }
+        }
+
+        printf("Do you want to continue using the app? (Y/N)");
+        scanf(" %c", &continue_choice);
+        printf("\n");
+
+    } while (continue_choice == 'y' || continue_choice == 'Y');
+
+    printf("See you next time!\n");
     return 0;
 }
