@@ -32,14 +32,14 @@ double DodecahedronVolume();
 const char *PyramidVolume(double *);
 
 // Area of Polygons
-void HexagonArea(float);
-void OctagonArea(float);
-void NonagonArea(float);
-void DecagonArea(float);
-void PentagonArea(float);
-void HeptagonArea(float);
-void TriangleArea(float, float);
-void RectangleArea(float, float);
+void HexagonArea();
+void OctagonArea();
+void NonagonArea();
+void DecagonArea();
+void PentagonArea();
+void HeptagonArea();
+void TriangleArea();
+void RectangleArea();
 
 // Utility Prototype
 int Converter();
@@ -103,75 +103,35 @@ int main()
     {
         switch (AreaMenu())
         {
+        case 1:
+            TriangleArea();
+            break;
+
+        case 2:
+            RectangleArea();
+            break;
+
         case 3:
-            printf("You Have Chosen Triangle!\n");
-            printf("\n");
-            printf("Enter base: ");
-            scanf("%f", &x);
-            printf("Enter height: ");
-            scanf("%f", &y);
-            printf("\n");
-            TriangleArea(x, y);
+            PentagonArea();
             break;
 
         case 4:
-            printf("You Have Chosen Square!\n");
-            printf("\n");
-            printf("Enter length: ");
-            scanf("%f", &x);
-            printf("Enter width: ");
-            scanf("%f", &y);
-            printf("\n");
-            RectangleArea(x, y);
+            HexagonArea();
             break;
 
         case 5:
-            printf("You Have Chosen Pentagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            printf("\n");
-            PentagonArea(x);
+            HeptagonArea();
             break;
 
         case 6:
-            printf("You Have Chosen Hexagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            printf("\n");
-            HexagonArea(x);
+            OctagonArea();
             break;
 
         case 7:
-            printf("You Have Chosen Heptagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            HeptagonArea(x);
+            NonagonArea();
             break;
 
         case 8:
-            printf("You Have Chosen Octagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            OctagonArea(x);
-            break;
-
-        case 9:
-            printf("You Have Chosen Nonagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
-            NonagonArea(x);
-            break;
-
-        case 10:
-            printf("You Have Chosen Decagon!\n");
-            printf("\n");
-            printf("Enter side length: ");
-            scanf("%f", &x);
             DecagonArea(x);
             break;
 
@@ -597,8 +557,18 @@ double DodecahedronVolume()
 }
 
 // Area of polygons
-void TriangleArea(float x, float y)
+void TriangleArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Triangle!\n");
+    printf("\n");
+    printf("Enter base: ");
+    scanf("%f", &x);
+    printf("Enter height: ");
+    scanf("%f", &y);
+    printf("\n");
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -610,8 +580,18 @@ void TriangleArea(float x, float y)
     printf("Area: %.2f\n", tri);
 }
 
-void RectangleArea(float x, float y)
+void RectangleArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Square!\n");
+    printf("\n");
+    printf("Enter length: ");
+    scanf("%f", &x);
+    printf("Enter width: ");
+    scanf("%f", &y);
+    printf("\n");
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -623,8 +603,16 @@ void RectangleArea(float x, float y)
     printf("Area: %.2f\n", square);
 }
 
-void PentagonArea(float x)
+void PentagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Pentagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+    printf("\n");
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -637,8 +625,16 @@ void PentagonArea(float x)
     printf("Area: %.2f\n", pentagon);
 }
 
-void HexagonArea(float x)
+void HexagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Hexagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+    printf("\n");
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -652,8 +648,15 @@ void HexagonArea(float x)
     printf("Area: %.2f\n", hexagon);
 }
 
-void HeptagonArea(float x)
+void HeptagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Heptagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -667,8 +670,15 @@ void HeptagonArea(float x)
     printf("Area: %.2f\n", heptagon);
 }
 
-void OctagonArea(float x)
+void OctagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Octagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -683,8 +693,15 @@ void OctagonArea(float x)
     printf("Area: %.2f\n", octagon);
 }
 
-void NonagonArea(float x)
+void NonagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Nonagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -698,8 +715,15 @@ void NonagonArea(float x)
     printf("Area: %.2f\n", nonagon);
 }
 
-void DecagonArea(float x)
+void DecagonArea()
 {
+    int x, y;
+
+    printf("You Have Chosen Decagon!\n");
+    printf("\n");
+    printf("Enter side length: ");
+    scanf("%f", &x);
+
     if (x < 0 || x == 'a')
     {
         printf("INVALID VALUE!");
@@ -712,7 +736,7 @@ void DecagonArea(float x)
     printf("Area: %.2f\n", decagon);
 }
 
-// Utility Funtion
+// Utility Function
 int Converter()
 {
     double number, result;
