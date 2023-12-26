@@ -4,10 +4,9 @@
 
 // Menu Prototypes
 int MainMenu();
-int AreaMenu();
+int PerimeterMenu();
 int VolumeMenu();
 int PyramidMenu();
-int PerimeterMenu();
 int PolyhedronMenu();
 
 // Perimeter Prototypes
@@ -19,14 +18,14 @@ double RectanglePerimeter();
 
 // Volume Prototypes
 double CubeVolume();
-double ConeVolume();
 double PrismVolume();
-double SphereVolume();
 double CylinderVolume();
+double ConeVolume();
+double SphereVolume();
+const char * PyramidVolume(double*);
 double EllipsoidVolume();
-double OctahedronVolume();
 double TetrahedronVolume();
-double IcosahedronVolume();
+double OctahedronVolume();
 double DodecahedronVolume();
 // this function uses a pass by ref parameter
 const char *PyramidVolume(double *);
@@ -41,26 +40,23 @@ void HeptagonArea();
 void TriangleArea();
 void RectangleArea();
 
+//Circle
+float circumferenceOfCircle (float);
+float diameterOfCircle(float);
+float radiusOfCircle(float, char);
+
 // Utility Prototype
 int Converter();
 double SideEntry();
 
-// macro
-// macro is used to define a constant value
-// example: #define pi 3.14159
-// pi is now a constant value of 3.14159, and you want to use it every time and don't need to change
-// example: #define note() printf("\nPlease Select only from choices\n");
-// note() is now a function that prints the string "Please Select only from choices" and you can use it every time
-// note() is used in the main function
-#define note() printf("\nPlease Select only from choices\n");
-
-int main()
-{
+int main() {
     double side;
 
-    int menuChoice;
-    double perimeter, volume, convert;
-    char *perimeterSelectedName, *volumeSelectedName; // string holder
+    int menuChoice, circleChoice;
+    double perimeter, volume;
+    float value, circumference,diameter, radius;
+    char *perimeterSelectedName, *volumeSelectedName;     // string holder
+    char type;
 
     float x, y, squared, angle;
     int shape;
@@ -75,7 +71,7 @@ int main()
         {
         case 0:
             return 0; // exit the program
-        case 1:       // square
+        case 1: // square
             perimeter = SquarePerimeter();
             perimeterSelectedName = "Square";
             break;
@@ -97,11 +93,26 @@ int main()
             break;
         }
 
-        printf("The total perimeter of the %s is : %.2lf", perimeterSelectedName, perimeter);
+        printf("The total perimeter of the %s is : %.2lf", perimeterSelectedName, perimeter );
     }
     else if (menuChoice == 2)
     {
-        switch (AreaMenu())
+        printf("Area Of Regular 2D Polygons:\n");
+        printf("\n");
+        printf("Triangle = 3\n");
+        printf("Square = 4\n");
+        printf("Pentagon = 5\n");
+        printf("Hexagon = 6\n");
+        printf("Heptagon = 7\n");
+        printf("Octagon = 8\n");
+        printf("Nonagon = 9\n");
+        printf("Decagon = 10\n");
+        printf("\n");
+        printf("Select a 2D shape to be computed: ");
+        scanf("%d", &shape);
+        printf("\n");
+
+        switch (shape)
         {
         case 1:
             TriangleArea();
@@ -139,6 +150,7 @@ int main()
             printf("Invalid Polygon!");
             break;
         }
+
     }
     else if (menuChoice == 3)
     {
@@ -146,36 +158,36 @@ int main()
         {
         case 0:
             return 0;
-        case 1: // cube
+        case 1: //cube
             volume = CubeVolume();
             volumeSelectedName = "Cube";
             break;
-        case 2: // prism
+        case 2: //prism
             volume = PrismVolume();
             volumeSelectedName = "Prism";
             break;
-        case 3: // cylinder
+        case 3: //cylinder
             volume = CylinderVolume();
             volumeSelectedName = "Cylinder";
             break;
-        case 4: // cone
+        case 4: //cone
             volume = ConeVolume();
             volumeSelectedName = "Cone";
             break;
-        case 5: // sphere
+        case 5: //sphere
             volume = SphereVolume();
             volumeSelectedName = "Sphere";
             break;
-        case 6: // pyramids
+        case 6: //pyramids
             volumeSelectedName = PyramidVolume(&volume);
             break;
 
-        case 7: // ellipsoid
+        case 7: //ellipsoid
             volume = EllipsoidVolume();
             volumeSelectedName = "Ellipsoid";
             break;
 
-        case 8: // polyhedron
+        case 8: //polyhedron
             switch (PolyhedronMenu())
             {
             case 1:
@@ -189,13 +201,18 @@ int main()
                 break;
 
             case 3:
-                volume = DodecahedronVolume();
-                volumeSelectedName = "Dodecahedron";
+                volume =
+                    // Dodecahedron
+                    printf("Enter side length: ");
+                scanf("%lf", &side);
+                printf("Dodecahedron Volume: %.2lf\n", (15.0 + 7.0 * sqrt(5.0)) / 4.0 * pow(side, 3));
                 break;
 
             case 4:
-                volume = IcosahedronVolume();
-                volumeSelectedName = "Icosahedron";
+                // Icosahedron
+                printf("Enter side length: ");
+                scanf("%lf", &side);
+                printf("Icosahedron Volume: %.2lf\n", (5.0 / 12.0) * (3.0 + sqrt(5.0)) * pow(side, 3));
                 break;
 
             default:
@@ -208,15 +225,63 @@ int main()
 
         printf("The total volume of the %s is: %.2lf\n", volumeSelectedName, volume);
     }
+    else if (menuChoice == 4)
+    {
+
+        printf("What do you want to get?\n");
+        printf("1. Circumference\n");
+        printf("2. Diameter\n");
+        printf("3. Radius\n");
+        scanf("%d", &circleChoice);
+
+        if (circleChoice == 1)
+        {
+            printf("Enter the radius of the circle: ");
+            scanf("%f", &value);
+
+            circumference = circumferenceOfCircle (value);
+            printf("The circumference of the circle who has the radius of %.2f is %.2f.\n",value, circumference);
+        }
+        else if (circleChoice == 2)
+        {
+            printf("Enter the radius of the circle: ");
+            scanf("%f", &value);
+
+            diameter = diameterOfCircle (value);
+            printf("The diameter of the circle who has the radius of %.2f is %.2f.\n",value, diameter);
+        }
+        else if (circleChoice == 3)
+        {
+            printf("Enter the value: ");
+            scanf("%f", &value);
+
+            printf ("Enter 'd' if the value is a diameter of a circle and 'c' if it's a circumference of a circle.");
+            scanf (" %c", &type);
+
+            switch (type) {
+            case 'd':
+                radius = radiusOfCircle(value,type);
+                printf("The radius of the circle who has the diameter of %.2f is %.2f.\n",value, radius);
+                break;
+            case 'c':
+                radius = radiusOfCircle(value,type);
+                printf("The radius of the circle who has the circumference of %.2f is %.2f.\n",value, radius);
+                break;
+            default:
+                break;
+            }
+        }
+    }
     else if (menuChoice == 5)
     {
-        convert = Converter();
+
     }
     else if (menuChoice == 0)
         return 0;
     else
         printf("Invalid Choice");
     return 0;
+
 }
 
 // Menu Functions
@@ -226,7 +291,7 @@ int MainMenu()
 
     do
     {
-        note();
+        printf("Please Select only from choices");
         printf("Choose what you want to get:\n");
         printf("1. Perimeter\n");
         printf("2. Area\n");
@@ -234,7 +299,6 @@ int MainMenu()
         printf("4. All about circle\n");
         printf("5. Unit Converter\n");
         printf("0. Exit Program\n");
-        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &required);
     } while (required < 0 || required > 5);
@@ -248,17 +312,16 @@ int PerimeterMenu()
 
     do
     {
-        note();
-        printf("What figure is it ?\n");
-        printf("1. Square\n");
-        printf("2. Circle\n");
+        printf("Please Select only from choices");
+        printf("What figure is it ?\n" ) ;
+        printf("1. Square\n") ;
+        printf("2. Circle\n") ;
         printf("3. Rectangle\n");
         printf("4. Triangle\n");
         printf("5. Polygon (up to Decagon)\n");
         printf("0. Exit Program\n");
-        printf("\n");
         printf("Enter your choice: ");
-        scanf("%d", &figureChoice);
+        scanf("%d", &figureChoice );
     } while (figureChoice < 0 || figureChoice > 5);
 
     return figureChoice;
@@ -270,7 +333,7 @@ int VolumeMenu()
 
     do
     {
-        note();
+        printf("Please Select only from choices");
         printf("What figure is it?\n");
         printf("1. Cube\n");
         printf("2. Prism\n");
@@ -281,10 +344,9 @@ int VolumeMenu()
         printf("7. Ellipsoid\n");
         printf("8. Polyhedron\n");
         printf("0. Exit Program\n");
-        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &figureChoice);
-    } while (figureChoice < 0 || figureChoice > 8);
+    } while(figureChoice < 0 || figureChoice > 8);
 
     return figureChoice;
 }
@@ -295,17 +357,15 @@ int PyramidMenu()
 
     do
     {
-        note();
+        printf("Please Select only from choices");
         printf("Choose a pyramid \n");
         printf("1. Triangular Pyramid\n");
         printf("2. Rectangular Pyramid\n");
         printf("3. Pentagonal Pyramid\n");
         printf("4. Hexagonal Pyramid\n");
-        printf("\n");
         printf("Enter your choice: ");
         scanf("%d", &pyramidChoice);
-    } while (pyramidChoice < 1 || pyramidChoice > 4);
-    printf("\n");
+    } while(pyramidChoice < 1 || pyramidChoice > 4);
 
     return pyramidChoice;
 }
@@ -314,47 +374,15 @@ int PolyhedronMenu()
 {
     int polyhedronChoice;
 
-    do
-    {
-        note();
-        printf("Choose a polyhedron \n");
-        printf("1. Tetrahedron\n");
-        printf("2. Octahedron\n");
-        printf("3. Dodecahedron\n");
-        printf("4. Icosahedron\n");
-        printf("\n");
-        printf("Enter your choice: ");
-        scanf("%d", &polyhedronChoice);
-    } while (polyhedronChoice < 1 || polyhedronChoice > 4);
-    printf("\n");
+    printf("Choose a polyhedron \n");
+    printf("1. Tetrahedron\n");
+    printf("2. Octahedron\n");
+    printf("3. Dodecahedron\n");
+    printf("4. Icosahedron\n");
+    printf("Enter your choice: ");
+    scanf("%d", &polyhedronChoice);
 
     return polyhedronChoice;
-}
-
-int AreaMenu()
-{
-    int figureChoice;
-
-    do
-    {
-        note();
-        printf("Area Of Regular 2D Polygons:\n");
-        printf("\n");
-        printf("1. Triangle\n");
-        printf("2. Square\n");
-        printf("3. Pentagon\n");
-        printf("4. Hexagon\n");
-        printf("5. Heptagon\n");
-        printf("6. Octagon\n");
-        printf("7. Nonagon\n");
-        printf("8. Decagon\n");
-        printf("\n");
-        printf("Select a 2D shape to be computed: ");
-        scanf("%d", &figureChoice);
-    } while (figureChoice < 1 || figureChoice > 8);
-    printf("\n");
-
-    return figureChoice;
 }
 
 // Perimeter Computation Functions
@@ -372,8 +400,8 @@ double CirclePerimeter()
 {
     double input;
 
-    printf("Enter radius: ");
-    scanf("%lf", &input);
+    printf ( "Enter radius: " ) ;
+    scanf ( "%lf", &input ) ;
 
     return input * 2 * M_PI;
 }
@@ -382,9 +410,9 @@ double RectanglePerimeter()
 {
     double length, width;
 
-    printf("Enter length and width: \n");
-    printf("Use commas to separate each number \n");
-    scanf("%lf , %lf", &length, &width);
+    printf ( "Enter length and width: \n" ) ;
+    printf ( "Use commas to separate each number \n" ) ;
+    scanf ( "%lf , %lf", &length, &width ) ;
 
     return (length * 2) + (width * 2);
 }
@@ -393,9 +421,9 @@ double TrianglePerimeter()
 {
     double base, height;
 
-    printf("Enter base and height: \n");
-    printf("Use commas to separate each number \n");
-    scanf("%lf , %lf", &base, &height);
+    printf ( "Enter base and height: \n" ) ;
+    printf ( "Use commas to separate each number \n" ) ;
+    scanf ( "%lf , %lf", &base, &height );
 
     return (base * 2) + height;
 }
@@ -404,10 +432,10 @@ double PolygonPerimeter()
 {
     double side, length;
 
-    printf("Enter the number of sides: ");
-    scanf("%lf", &side);
-    printf("Enter the length of each side: ");
-    scanf("%lf", &length);
+    printf ( "Enter the number of sides: " ) ;
+    scanf ( "%lf", &side ) ;
+    printf ( "Enter the length of each side: " ) ;
+    scanf ( "%lf", &length) ;
 
     return side * length;
 }
@@ -423,8 +451,8 @@ double CubeVolume()
         printf("Please use only yes or no\n");
         printf("Is there a need for conversion? yes or no \n");
         scanf("%s", &conversionChoice);
-        if (strstr(tolower(conversionChoice), "y"))
-        // strstr() are used to check from first parameter if the second parameter exist. n here is if y exist in conversionChoice
+        if(strstr(tolower(conversionChoice), "y"))
+            // strstr() are used to check from first parameter if the second parameter exist. n here is if y exist in conversionChoice
         {
             length = Converter();
             break;
@@ -436,9 +464,9 @@ double CubeVolume()
             scanf("%lf", &length);
             break;
         }
-    } while (1);
+    } while(1);
 
-    return length * length * length;
+    return length*length*length;
 }
 
 double CylinderVolume()
@@ -449,7 +477,7 @@ double CylinderVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf", &radius, &height);
 
-    return M_PI * radius * radius * height;
+    return M_PI*radius*radius*height;
 }
 
 double PrismVolume()
@@ -460,7 +488,7 @@ double PrismVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf, %lf", &length, &width, &height);
 
-    return length * width * height;
+    return length*width*height;
 }
 
 double ConeVolume()
@@ -471,7 +499,7 @@ double ConeVolume()
     printf("Use commas to separate each number\n");
     scanf("%lf, %lf", &radius, &height);
 
-    return (M_PI * radius * radius * height) / 3;
+    return (M_PI*radius*radius*height)/3;
 }
 
 double SphereVolume()
@@ -481,20 +509,11 @@ double SphereVolume()
     printf("Enter radius: \n");
     scanf("%lf, %lf", &radius, &height);
 
-    return (4 * M_PI * radius * radius * radius) / 3;
+    return (4*M_PI*radius*radius*radius)/3;
 }
 
 // const char * is used to return a string. the double* volume uses a pass by ref parameter.
-// explaining pass by reference
-// pass by reference is used to pass a variable to a function and the function will change the value of the variable
-// example: void change(int *x) { *x = 10; }
-// int main() { int x = 5; change(&x); printf("%d", x); }
-// the output will be 10 because the function change() changed the value of x to 10
-// reason of using it here is because we want to return a string and a double value
-// by using this we can return both
-// also instead of making multiple function with almost similar formula we use here 1 with multiple variations
-// in comparison
-const char *PyramidVolume(double *volume)
+const char * PyramidVolume(double* volume)
 {
     double base, height;
 
@@ -546,14 +565,77 @@ double OctahedronVolume()
     return (1.0 / 3.0) * sqrt(2.0) * pow(SideEntry(), 3);
 }
 
-double IcosahedronVolume()
-{
-    return (5.0 / 12.0) * (3.0 + sqrt(5.0)) * pow(SideEntry(), 3);
+// Utility Funtion
+int Converter() {
+    double number, result;
+    int choice;
+    char *from;
+
+    printf("Choose the conversion:\n");
+    printf("1. Kilometers to Meters\n");
+    printf("2. Centimeters to Meters\n");
+    printf("3. Millimeters to Meters\n");
+    printf("4. Inches to Meters\n");
+    printf("5. Feet to Meters\n");
+    printf("6. Yards to Meters\n");
+    printf("7. Miles to Meters\n");
+    printf("8. Nautical Miles to Meters\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    printf("Enter the length to convert: ");
+    scanf("%lf", &number);
+
+    switch (choice)
+    {
+    case 1: // Kilometers to Meters
+        result = number * 1000.0;
+        from = "Kilometers";
+        break;
+    case 2: // Centimeters to Meters
+        result = number * 0.01;
+        from = "Centimeters";
+        break;
+    case 3: // Millimeters to Meters
+        result = number * 0.001;
+        from = "Millimeters";
+        break;
+    case 4: // Inches to Meters
+        result = number * 0.0254;
+        from = "Inches";
+        break;
+    case 5: // Feet to Meters
+        result = number * 0.3048;
+        from = "Feet";
+        break;
+    case 6: // Yards to Meters
+        result = number * 0.9144;
+        from = "Yards";
+        break;
+    case 7: // Miles to Meters
+        result = number * 1609.34;
+        from = "Miles";
+        break;
+    case 8: // Nautical Miles to Meters
+        result = number * 1852.0;
+        from = "Nautical Miles";
+        break;
+    default:
+        printf("Invalid choice\n");
+        break;
+    }
+    printf("%.2lf %s converted to meters is: %.2lf meters\n", from, number, result);
+    return result;
 }
 
-double DodecahedronVolume()
+double SideEntry()
 {
-    return (15.0 + 7.0 * sqrt(5.0)) / 4.0 * pow(SideEntry(), 3);
+    double side;
+
+    printf("Enter side length: ");
+    scanf("%lf", &side);
+
+    return side;
 }
 
 // Area of polygons
@@ -739,73 +821,24 @@ void DecagonArea()
 // Utility Function
 int Converter()
 {
-    double number, result;
-    int choice;
-    char *from;
-
-    printf("Choose the conversion:\n");
-    printf("1. Kilometers to Meters\n");
-    printf("2. Centimeters to Meters\n");
-    printf("3. Millimeters to Meters\n");
-    printf("4. Inches to Meters\n");
-    printf("5. Feet to Meters\n");
-    printf("6. Yards to Meters\n");
-    printf("7. Miles to Meters\n");
-    printf("8. Nautical Miles to Meters\n");
-    printf("Enter your choice: ");
-    scanf("%d", &choice);
-
-    printf("Enter the length to convert: ");
-    scanf("%lf", &number);
-
-    switch (choice)
-    {
-    case 1: // Kilometers to Meters
-        result = number * 1000.0;
-        from = "Kilometers";
-        break;
-    case 2: // Centimeters to Meters
-        result = number * 0.01;
-        from = "Centimeters";
-        break;
-    case 3: // Millimeters to Meters
-        result = number * 0.001;
-        from = "Millimeters";
-        break;
-    case 4: // Inches to Meters
-        result = number * 0.0254;
-        from = "Inches";
-        break;
-    case 5: // Feet to Meters
-        result = number * 0.3048;
-        from = "Feet";
-        break;
-    case 6: // Yards to Meters
-        result = number * 0.9144;
-        from = "Yards";
-        break;
-    case 7: // Miles to Meters
-        result = number * 1609.34;
-        from = "Miles";
-        break;
-    case 8: // Nautical Miles to Meters
-        result = number * 1852.0;
-        from = "Nautical Miles";
-        break;
-    default:
-        printf("Invalid choice\n");
-        break;
-    }
-    printf("%.2lf %s converted to meters is: %.2lf meters\n", from, number, result);
-    return result;
+    return 2 * 3.14159 * value;
 }
-
-double SideEntry()
+float diameterOfCircle (float value)
 {
-    double side;
-
-    printf("Enter side length: ");
-    scanf("%lf", &side);
-
-    return side;
+    return 2 * value;
+}
+float radiusOfCircle (float value, char type)
+{
+    if (type == 'd')
+    {
+        return value / 2;
+    }
+    else if (type == 'c')
+    {
+        return value / (2 * 3.14159);
+    }
+    else
+    {
+        return -1;
+    }
 }
