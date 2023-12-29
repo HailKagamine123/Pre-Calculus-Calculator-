@@ -218,6 +218,7 @@ int main()
 
                 default:
                     printf("Invalid choice\n");
+                    break;
                 }
             default:
                 printf("Invalid choice\n");
